@@ -1,2 +1,66 @@
 # PBO
 latihan kalkulator
+
+!! BACKEND !!
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <title>KALKULATOR, DKING !</title>
+    </head>
+    <?php
+$hasil = '';
+$classhasil = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+   $value = $_POST['nilai'];
+   $classhasil = $_POST['calculation'];
+   if ($value === 'DEL'){
+       $classhasil = substr($classhasil, 0, -1);
+  }elseif ($value === '='){
+       $classhasil = str_replace('%', '/100', $classhasil);
+      $classhasil = str_replace(['+', '-', '', '/'], ['+','-', '', '/ '], $classhasil);
+      $classhasil = eval("return $classhasil;");
+  }elseif ($value === 'C'){
+      $classhasil = '';
+  } else {
+      $classhasil .= $value;
+  }
+}
+?>
+    <body>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="calculator p-2 border-3">
+                        <form action="" method="post">
+                        <input class="display form-control mb-2" type="text" name="calculation" value="<?php echo $classhasil ?>" readonly> 
+
+                            <div class="buttons">
+                                <?php
+                    $buttons = ['7', '8', '9', '+', '4', '5', '6', '-', '1', '2', '3', '*', '0', '.', '/', 'C', 'DEL', '=',];
+
+                                foreach ($buttons as $button) {
+                                    $class = 'button btn';
+                                    if ($button === 'C' || $button === 'DEL') {
+                                        $class .= ' clear';
+                                    }?>
+                                    <button type="submit" name="nilai" class="<?= $class?>" value="<?= $button?>"><?= $button; ?></button>
+                              <?php  } ?>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
