@@ -1,0 +1,17 @@
+fun main() {
+
+        print("Inputkan nama: ")
+        val nama = readLine()?.trim()
+        print("Inputkan umur: ")
+        val umur = readLine()
+        print("Inputkan alamat: ")
+        val alamat = readLine()?.toIntOrNull()
+        print("Inputkan no telp: ")
+        val noTelp = readLine()?.toIntOrNull()
+        print("Inputkan hobi: ")
+        val hobi = readLine()
+
+        // Try adding program arguments via Run/Debug configuration.
+        // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
+        println("Namaku $nama saat ini berusia $umur tahun, saya tinggal di $alamat. no telp saya $noTelp hobi saya adalah $hobi")
+    }
